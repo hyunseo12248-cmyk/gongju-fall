@@ -1,0 +1,3328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>우리의 공주 가을여행 🌰</title>
+
+<style>
+:root {
+  --brown:#493226;
+  --brown2:#79523a;
+  --brown3:#a4774e;
+  --chestnut:#b98045;
+  --gold:#d9a35f;
+  --cream:#faf5eb;
+  --cream2:#f2e8d9;
+  --white:#ffffff;
+  --text:#39291f;
+  --muted:#897b6c;
+  --line:#e8dac7;
+  --red:#c76658;
+  --shadow:0 10px 30px rgba(73,50,38,.09);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  margin:0;
+  font-family:
+    Pretendard,
+    "Noto Sans KR",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color:var(--text);
+  background:var(--cream);
+}
+
+button,
+input,
+select,
+textarea {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+button:disabled {
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+[hidden] {
+  display:none!important;
+}
+
+.container {
+  width:min(1250px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* 로그인 */
+
+.auth-bar {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#35241b;
+  color:white;
+  padding:10px 0;
+}
+
+.auth-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.auth-status {
+  font-size:12px;
+  font-weight:700;
+}
+
+.auth-right {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-name {
+  font-size:11px;
+  opacity:.8;
+}
+
+.auth-btn {
+  border:0;
+  border-radius:8px;
+  padding:8px 12px;
+  background:white;
+  color:var(--brown);
+  font-size:11px;
+  font-weight:850;
+}
+
+.logout-btn {
+  background:transparent;
+  color:white;
+  border:1px solid #ffffff55;
+}
+
+/* HERO */
+
+.hero {
+  padding:18px 0 20px;
+}
+
+.hero-card {
+  position:relative;
+  overflow:hidden;
+  min-height:135px;
+  padding:22px 30px;
+  border-radius:21px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      115deg,
+      #38251b 0%,
+      #69452e 55%,
+      #a77849 100%
+    );
+
+  box-shadow:
+    0 14px 35px rgba(73,50,38,.17);
+}
+
+.hero-card::after {
+  content:"🌰";
+  position:absolute;
+  right:45px;
+  top:50%;
+  font-size:105px;
+  opacity:.3;
+  transform:translateY(-50%) rotate(-15deg);
+  pointer-events:none;
+}
+
+.hero-badge {
+  display:inline-block;
+  padding:5px 10px;
+  border:1px solid #ffffff55;
+  border-radius:999px;
+  background:#ffffff18;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:1px;
+}
+
+.hero h1 {
+  position:relative;
+  z-index:1;
+  margin:10px 0 6px;
+  font-size:clamp(25px,3vw,34px);
+  letter-spacing:-1.5px;
+}
+
+.hero-sub {
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-size:11px;
+  color:#ffffffcc;
+}
+
+.hero-date {
+  position:relative;
+  z-index:1;
+  display:inline-block;
+  margin-top:12px;
+  padding:6px 10px;
+  border-radius:8px;
+  background:#ffffff20;
+  font-size:10px;
+  font-weight:800;
+}
+
+/* 공통 */
+
+.section {
+  margin-bottom:28px;
+}
+
+.section-title {
+  margin:0 0 15px;
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:-.6px;
+}
+
+.card {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+}
+
+.btn {
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:850;
+}
+
+.btn-primary {
+  color:white;
+  background:var(--brown2);
+}
+
+.btn-primary:hover {
+  background:var(--brown);
+}
+
+.btn-light {
+  color:var(--brown);
+  background:var(--cream2);
+}
+
+.btn-danger {
+  color:var(--red);
+  background:#fff0ec;
+}
+
+/* 메인 4:6 */
+
+.trip-layout {
+  display:grid;
+  grid-template-columns:4fr 6fr;
+  gap:17px;
+  align-items:start;
+}
+
+/* 일정 */
+
+.schedule-panel {
+  overflow:hidden;
+}
+
+.panel-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:18px;
+  border-bottom:1px solid var(--line);
+}
+
+.panel-title {
+  margin:0;
+  font-size:17px;
+  font-weight:900;
+}
+
+.panel-sub {
+  margin:5px 0 0;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.day-tabs {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  padding:12px;
+  background:#fbf8f3;
+}
+
+.day-tab {
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:white;
+  padding:12px 5px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:850;
+}
+
+.day-tab span {
+  display:block;
+  margin-top:3px;
+  font-size:10px;
+  opacity:.7;
+}
+
+.day-tab.active {
+  color:white;
+  border-color:var(--brown2);
+  background:var(--brown2);
+}
+
+.schedule-list {
+  height:530px;
+  overflow-y:auto;
+  padding:15px;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#cdb89d transparent;
+}
+
+.schedule-card {
+  position:relative;
+  display:block;
+  margin-bottom:11px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fffdfa;
+  cursor:pointer;
+  transition:.2s;
+  outline:none;
+}
+
+.schedule-card:hover {
+  border-color:#c7a37b;
+}
+
+.schedule-card.active {
+  border-color:var(--chestnut);
+  background:#fff6e9;
+  box-shadow:
+    0 5px 15px rgba(185,128,69,.1);
+}
+
+.schedule-card.active::before {
+  content:"";
+  position:absolute;
+  top:12px;
+  bottom:12px;
+  left:0;
+  width:4px;
+  border-radius:4px;
+  background:var(--chestnut);
+}
+
+.schedule-time {
+  display:inline-block;
+  margin-bottom:8px;
+  color:var(--chestnut);
+  font-size:12px;
+  font-weight:900;
+}
+
+.schedule-name {
+  margin:0;
+  font-size:15px;
+  font-weight:900;
+}
+
+.schedule-place {
+  margin-top:7px;
+  font-size:11px;
+  color:var(--brown2);
+}
+
+.schedule-note {
+  margin-top:9px;
+  font-size:11px;
+  line-height:1.7;
+  color:var(--muted);
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.schedule-actions {
+  display:flex;
+  justify-content:flex-end;
+  gap:6px;
+  margin-top:11px;
+}
+
+.small-btn {
+  padding:6px 9px;
+  border:0;
+  border-radius:7px;
+  background:var(--cream2);
+  color:var(--brown);
+  font-size:10px;
+  font-weight:800;
+}
+
+.small-btn.delete {
+  background:#fff0ec;
+  color:var(--red);
+}
+
+.empty {
+  padding:50px 15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+}
+
+/* 지도 */
+
+.map-panel {
+  overflow:hidden;
+}
+
+.map-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:17px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.map-header h3 {
+  margin:0;
+  font-size:17px;
+  font-weight:900;
+}
+
+.map-status {
+  margin-top:5px;
+  font-size:10px;
+  color:var(--muted);
+}
+
+.map-wrap {
+  position:relative;
+  height:470px;
+  background:#efe8db;
+}
+
+#map {
+  width:100%;
+  height:100%;
+}
+
+.map-fallback {
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:25px;
+  background:#f4ebdc;
+  text-align:center;
+}
+
+.map-fallback-icon {
+  font-size:45px;
+}
+
+.map-fallback p {
+  margin:0;
+  font-size:12px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.map-pin {
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:7px 10px;
+  border:2px solid white;
+  border-radius:999px;
+  background:var(--brown2);
+  color:white;
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 4px 12px #00000033;
+  white-space:nowrap;
+  cursor:pointer;
+}
+
+.map-pin.active {
+  background:var(--chestnut);
+  transform:scale(1.12);
+}
+
+.map-controls {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:16px;
+  border-top:1px solid var(--line);
+}
+
+.selected-info {
+  flex:1;
+  min-width:0;
+}
+
+.selected-time {
+  color:var(--chestnut);
+  font-size:12px;
+  font-weight:900;
+}
+
+.selected-title {
+  margin-top:4px;
+  font-size:15px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+
+.selected-place {
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.step-buttons {
+  display:flex;
+  gap:6px;
+  flex-shrink:0;
+}
+
+.step-btn {
+  padding:11px 14px;
+  border:0;
+  border-radius:9px;
+  background:var(--brown2);
+  color:white;
+  font-size:12px;
+  font-weight:850;
+}
+
+.step-btn.prev {
+  background:var(--cream2);
+  color:var(--brown);
+}
+
+/* 지도 설정 */
+
+.map-settings {
+  border-top:1px solid var(--line);
+  padding:12px 17px;
+  background:#fffdfa;
+}
+
+.map-settings summary {
+  cursor:pointer;
+  color:var(--brown2);
+  font-size:11px;
+  font-weight:850;
+}
+
+.map-settings-body {
+  margin-top:12px;
+}
+
+.map-settings-body p {
+  margin:0 0 10px;
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.map-key-row {
+  display:flex;
+  gap:7px;
+}
+
+.map-key-row input {
+  flex:1;
+  min-width:0;
+}
+
+.domain-info {
+  margin-top:8px;
+  font-size:10px;
+  color:var(--muted);
+  overflow-wrap:anywhere;
+}
+
+/* 메모 */
+
+.memo-card {
+  padding:22px;
+}
+
+.memo-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.memo-heading h3 {
+  margin:0;
+  font-size:17px;
+  font-weight:900;
+}
+
+.memo-heading span {
+  font-size:11px;
+  color:var(--muted);
+}
+
+.memo-textarea {
+  width:100%;
+  min-height:180px;
+  resize:vertical;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fffdfa;
+  font-size:13px;
+  line-height:1.9;
+  color:var(--text);
+}
+
+.memo-bottom {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+}
+
+.memo-hint {
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* 입력 */
+
+input,
+select,
+textarea {
+  outline:none;
+}
+
+input,
+select {
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:white;
+  color:var(--text);
+  font-size:12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color:var(--chestnut);
+}
+
+/* 모달 */
+
+dialog {
+  width:min(480px,calc(100% - 24px));
+  max-height:90vh;
+  overflow-y:auto;
+  padding:25px;
+  border:0;
+  border-radius:20px;
+  background:white;
+  box-shadow:0 25px 70px #00000033;
+}
+
+dialog::backdrop {
+  background:#24180dbb;
+}
+
+.modal-title {
+  margin:0 0 20px;
+  font-size:21px;
+  font-weight:900;
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.field {
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full {
+  grid-column:1/-1;
+}
+
+.field label {
+  font-size:11px;
+  font-weight:850;
+  color:var(--brown2);
+}
+
+.field textarea {
+  width:100%;
+  min-height:90px;
+  resize:vertical;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.modal-actions {
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:20px;
+}
+
+/* 토스트 */
+
+.toast {
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  z-index:999;
+  padding:12px 18px;
+  border-radius:10px;
+  background:var(--brown);
+  color:white;
+  font-size:12px;
+  font-weight:850;
+  box-shadow:0 10px 30px #00000033;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,20px);
+  transition:.2s;
+}
+
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* 모바일 */
+
+@media(max-width:850px) {
+
+  .trip-layout {
+    grid-template-columns:1fr;
+  }
+
+  .schedule-list {
+    height:340px;
+  }
+
+  .map-wrap {
+    height:380px;
+  }
+
+  .hero-card {
+    min-height:125px;
+    padding:20px;
+  }
+
+  .hero-card::after {
+    right:15px;
+    font-size:80px;
+  }
+
+  .hero h1 {
+    font-size:26px;
+  }
+
+}
+
+@media(max-width:480px) {
+
+  .container {
+    width:calc(100% - 20px);
+  }
+
+  .hero-card {
+    padding:17px;
+    min-height:120px;
+  }
+
+  .hero h1 {
+    font-size:24px;
+  }
+
+  .hero-card::after {
+    font-size:68px;
+    right:5px;
+  }
+
+  .auth-status {
+    font-size:10px;
+  }
+
+  .user-name {
+    display:none;
+  }
+
+  .panel-head {
+    padding:14px;
+  }
+
+  .map-wrap {
+    height:330px;
+  }
+
+  .map-controls {
+    flex-wrap:wrap;
+  }
+
+  .step-buttons {
+    width:100%;
+  }
+
+  .step-btn {
+    flex:1;
+  }
+
+  .form-grid {
+    grid-template-columns:1fr;
+  }
+
+  .field.full {
+    grid-column:auto;
+  }
+
+  .memo-bottom {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .memo-bottom .btn {
+    width:100%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- 로그인 -->
+
+<div class="auth-bar">
+
+  <div class="container auth-inner">
+
+    <div class="auth-status" id="authStatus">
+      Firebase 연결 중...
+    </div>
+
+    <div class="auth-right">
+
+      <span class="user-name" id="userName"></span>
+
+      <button
+        class="auth-btn"
+        id="loginBtn"
+        type="button"
+      >
+        Google 로그인
+      </button>
+
+      <button
+        class="auth-btn logout-btn"
+        id="logoutBtn"
+        type="button"
+        hidden
+      >
+        로그아웃
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- 표지 -->
+
+<header class="hero">
+
+  <div class="container">
+
+    <div class="hero-card">
+
+      <div class="hero-badge">
+        🌰 GONGJU CHESTNUT TRIP
+      </div>
+
+      <h1>
+        우리의 공주 가을여행 🌰
+      </h1>
+
+      <p class="hero-sub">
+        친구들과 함께 만드는 특별한 1박 2일
+      </p>
+
+      <div class="hero-date">
+        2026.11.13 FRI → 11.14 SAT
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+<!-- 일정과 지도 -->
+
+<section class="section">
+
+  <div class="trip-layout">
+
+    <!-- 왼쪽 일정 -->
+
+    <div class="schedule-panel card">
+
+      <div class="panel-head">
+
+        <div>
+
+          <h2 class="panel-title">
+            🗓️ 여행 일정
+          </h2>
+
+          <p class="panel-sub">
+            일정을 누르거나 스크롤하면 지도가 움직여요.
+          </p>
+
+        </div>
+
+        <button
+          class="btn btn-primary"
+          id="addScheduleBtn"
+          type="button"
+        >
+          ＋ 추가
+        </button>
+
+      </div>
+
+
+      <div class="day-tabs">
+
+        <button
+          class="day-tab active"
+          data-day="2026-11-13"
+          type="button"
+        >
+          11월 13일
+          <span>DAY 01 · 금요일</span>
+        </button>
+
+        <button
+          class="day-tab"
+          data-day="2026-11-14"
+          type="button"
+        >
+          11월 14일
+          <span>DAY 02 · 토요일</span>
+        </button>
+
+      </div>
+
+
+      <div
+        class="schedule-list"
+        id="scheduleList"
+      ></div>
+
+    </div>
+
+
+    <!-- 오른쪽 지도 -->
+
+    <div class="map-panel card">
+
+      <div class="map-header">
+
+        <div>
+
+          <h3>📍 우리의 여행 지도</h3>
+
+          <div
+            class="map-status"
+            id="mapStatus"
+          >
+            지도를 준비하고 있어요.
+          </div>
+
+        </div>
+
+        <button
+          class="btn btn-light"
+          id="openKakaoBtn"
+          type="button"
+        >
+          카카오맵 ↗
+        </button>
+
+      </div>
+
+
+      <div class="map-wrap">
+
+        <div id="map"></div>
+
+        <div
+          class="map-fallback"
+          id="mapFallback"
+        >
+
+          <div class="map-fallback-icon">
+            🌰
+          </div>
+
+          <strong>
+            공주 여행 지도를 연결해주세요.
+          </strong>
+
+          <p id="mapFallbackText">
+            아래 지도 설정에서 카카오 JavaScript 키를
+            입력하면 일정별 위치가 표시돼요.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- 이전 / 다음 -->
+
+      <div class="map-controls">
+
+        <div class="selected-info">
+
+          <div
+            class="selected-time"
+            id="selectedTime"
+          >
+            -
+          </div>
+
+          <div
+            class="selected-title"
+            id="selectedTitle"
+          >
+            일정을 선택해주세요.
+          </div>
+
+          <div
+            class="selected-place"
+            id="selectedPlace"
+          ></div>
+
+        </div>
+
+        <div class="step-buttons">
+
+          <button
+            class="step-btn prev"
+            id="prevBtn"
+            type="button"
+          >
+            ← 이전
+          </button>
+
+          <button
+            class="step-btn"
+            id="nextBtn"
+            type="button"
+          >
+            다음 →
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- 카카오 지도 설정 -->
+
+      <details
+        class="map-settings"
+        id="mapSettings"
+      >
+
+        <summary>
+          ⚙️ 카카오맵 API 연결 설정
+        </summary>
+
+        <div class="map-settings-body">
+
+          <p>
+            카카오 Developers에서 발급받은
+            <strong>JavaScript 키</strong>를 입력해주세요.
+            로그인 후 저장하면 친구들과 공유돼요.
+          </p>
+
+          <div class="map-key-row">
+
+            <input
+              id="mapKeyInput"
+              placeholder="카카오 JavaScript 키"
+              autocomplete="off"
+            >
+
+            <button
+              class="btn btn-primary"
+              id="saveMapKeyBtn"
+              type="button"
+            >
+              연결
+            </button>
+
+          </div>
+
+          <div
+            class="domain-info"
+            id="domainInfo"
+          ></div>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- 공동 메모장 -->
+
+<section class="section" id="memo">
+
+  <h2 class="section-title">
+    📝 우리의 여행 메모장
+  </h2>
+
+  <div class="memo-card card">
+
+    <div class="memo-heading">
+
+      <h3>🌰 함께 적는 여행 메모</h3>
+
+      <span>친구들과 실시간 공유</span>
+
+    </div>
+
+    <textarea
+      class="memo-textarea"
+      id="memoInput"
+      placeholder="여행 준비물, 맛집 후보, 사고 싶은 것 등을 자유롭게 적어주세요!"
+    ></textarea>
+
+    <div class="memo-bottom">
+
+      <span
+        class="memo-hint"
+        id="memoHint"
+      >
+        로그인하면 친구들과 메모를 공유할 수 있어요.
+      </span>
+
+      <button
+        class="btn btn-primary"
+        id="saveMemoBtn"
+        type="button"
+      >
+        💾 메모 저장
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- 일정 추가 / 수정 모달 -->
+
+<dialog id="scheduleDialog">
+
+  <h2
+    class="modal-title"
+    id="dialogTitle"
+  >
+    일정 추가
+  </h2>
+
+  <form id="scheduleForm">
+
+    <div class="form-grid">
+
+      <div class="field">
+
+        <label for="scheduleDate">
+          날짜
+        </label>
+
+        <select id="scheduleDate">
+
+          <option value="2026-11-13">
+            11월 13일
+          </option>
+
+          <option value="2026-11-14">
+            11월 14일
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="scheduleTime">
+          시간
+        </label>
+
+        <input
+          type="time"
+          id="scheduleTime"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="schedulePlace">
+          장소
+        </label>
+
+        <input
+          id="schedulePlace"
+          placeholder="예: 공주 고속버스터미널"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="scheduleTitle">
+          일정
+        </label>
+
+        <input
+          id="scheduleTitle"
+          placeholder="예: 공주 도착"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="scheduleNote">
+          상세 내용 / 비고
+        </label>
+
+        <textarea
+          id="scheduleNote"
+          placeholder="이동 방법, 준비물, 참고사항 등"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn btn-light"
+        id="cancelDialogBtn"
+        type="button"
+      >
+        취소
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="saveScheduleBtn"
+        type="submit"
+      >
+        저장
+      </button>
+
+    </div>
+
+  </form>
+
+</dialog>
+
+
+<div class="toast" id="toast"></div>
+
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+
+<script>
+"use strict";
+
+/* =========================================
+   1. 기본 설정
+========================================= */
+
+const $ = id => document.getElementById(id);
+
+const TRIP_ID = "gongju-autumn-2026";
+
+const DAY1 = "2026-11-13";
+const DAY2 = "2026-11-14";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyASx2OA8SSzwwHzxCrPp9XmlEKkMf50Q24",
+  authDomain: "ttrr-b2255.firebaseapp.com",
+  projectId: "ttrr-b2255",
+  storageBucket: "ttrr-b2255.firebasestorage.app",
+  messagingSenderId: "529949761375",
+  appId: "1:529949761375:web:bd65e9cd5e5098845c20ea"
+};
+
+
+/* =========================================
+   2. 기본 여행 일정
+========================================= */
+
+const INITIAL_SCHEDULES = [
+
+  {
+    id:"initial-1",
+    date:DAY1,
+    time:"15:30",
+    place:"서울 고속버스터미널 경부",
+    title:"공주행 버스 탑승 🚌",
+    note:"15:30~18:00 공주 이동 예정"
+  },
+
+  {
+    id:"initial-2",
+    date:DAY1,
+    time:"18:00",
+    place:"공주 고속버스터미널",
+    title:"공주 도착 🌰",
+    note:"공주 도착 후 숙소로 이동\n숙소까지 도보 약 7분"
+  },
+
+  {
+    id:"initial-3",
+    date:DAY1,
+    time:"18:10",
+    place:"호텔 공산여관",
+    title:"숙소 체크인 🏨",
+    note:
+      "18:10~18:30 체크인\n\n" +
+      "버스가 일찍 도착해서 17시쯤 공주에 도착하면 " +
+      "'제일유통'에서 공주티 구매!\n" +
+      "제일유통은 18:30까지 영업.\n" +
+      "시간이 안 되면 다음 날 방문."
+  },
+
+  {
+    id:"initial-4",
+    date:DAY1,
+    time:"18:30",
+    place:"호텔 공산여관",
+    title:"김피탕 먹고 숙소에서 놀기 🍕",
+    note:
+      "버스에서 미리 김피탕 배달 주문하기.\n" +
+      "가게: 피탕김탕\n" +
+      "돼지고기로 변경하기!"
+  },
+
+  {
+    id:"initial-5",
+    date:DAY2,
+    time:"09:00",
+    place:"부자떡집",
+    title:"부자떡집 방문 🍡",
+    note:"오후에 가면 품절될 수 있으니 아침에 방문하기."
+  },
+
+  {
+    id:"initial-6",
+    date:DAY2,
+    time:"21:05",
+    place:"공주 고속버스터미널",
+    title:"서울행 버스 탑승 🚌",
+    note:
+      "21:05~23:00\n" +
+      "서울 고속버스터미널(경부)로 이동"
+  },
+
+  {
+    id:"initial-7",
+    date:DAY2,
+    time:"23:00",
+    place:"서울 고속버스터미널 경부",
+    title:"서울 도착 🏠",
+    note:"1박 2일 공주 여행 끝!"
+  }
+
+];
+
+
+function createDefaultData() {
+
+  return {
+    schedules:JSON.parse(
+      JSON.stringify(INITIAL_SCHEDULES)
+    ),
+    memo:"",
+    mapKey:""
+  };
+
+}
+
+
+/* =========================================
+   3. 상태 관리
+========================================= */
+
+let data = createDefaultData();
+
+let activeDay = DAY1;
+
+let selectedId = "initial-1";
+
+let editingId = null;
+
+let auth = null;
+let db = null;
+let tripRef = null;
+
+let unsubscribeTrip = null;
+
+let initializingTrip = false;
+
+let scrollFrame = null;
+
+let scrollGuardUntil = 0;
+
+let map = null;
+let placesService = null;
+
+let loadedMapKey = "";
+let loadingMapKey = "";
+
+let mapRenderSequence = 0;
+
+let mapOverlays = [];
+
+const geoCache = new Map();
+
+
+/* =========================================
+   4. 유틸리티
+========================================= */
+
+function uid() {
+
+  if(
+    window.crypto &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return crypto.randomUUID();
+  }
+
+  return (
+    Date.now().toString(36) +
+    Math.random().toString(36).slice(2)
+  );
+
+}
+
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function toast(message) {
+
+  const el = $("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  clearTimeout(toast.timer);
+
+  toast.timer = setTimeout(() => {
+    el.classList.remove("show");
+  },2300);
+
+}
+
+
+function sortedSchedules() {
+
+  return [...data.schedules].sort((a,b) => {
+
+    const dateCompare =
+      String(a.date).localeCompare(String(b.date));
+
+    if(dateCompare !== 0) {
+      return dateCompare;
+    }
+
+    return String(a.time || "")
+      .localeCompare(String(b.time || ""));
+
+  });
+
+}
+
+
+function currentSchedule() {
+
+  return data.schedules.find(
+    item => item.id === selectedId
+  ) || null;
+
+}
+
+
+function getUser() {
+
+  return auth ? auth.currentUser : null;
+
+}
+
+
+function requireLogin() {
+
+  if(!getUser()) {
+
+    toast("구글 로그인 후 수정할 수 있어요.");
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+function normalizeData(value) {
+
+  const base = createDefaultData();
+
+  if(!value || typeof value !== "object") {
+    return base;
+  }
+
+  return {
+    schedules:Array.isArray(value.schedules)
+      ? value.schedules
+      : base.schedules,
+
+    memo:typeof value.memo === "string"
+      ? value.memo
+      : "",
+
+    mapKey:typeof value.mapKey === "string"
+      ? value.mapKey
+      : ""
+  };
+
+}
+
+
+/* =========================================
+   5. 일정 렌더링
+========================================= */
+
+function renderSchedules() {
+
+  const items = sortedSchedules().filter(
+    item => item.date === activeDay
+  );
+
+  document.querySelectorAll(".day-tab")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.day === activeDay
+      );
+
+    });
+
+  const list = $("scheduleList");
+
+  if(items.length === 0) {
+
+    list.innerHTML = `
+      <div class="empty">
+        아직 등록된 일정이 없어요.<br>
+        새로운 일정을 추가해보세요.
+      </div>
+    `;
+
+    updateSelectedUI();
+
+    return;
+
+  }
+
+  list.innerHTML = items.map(item => `
+
+    <article
+      class="schedule-card"
+      data-id="${escapeHTML(item.id)}"
+      tabindex="0"
+      role="button"
+      aria-label="${escapeHTML(item.title)} 일정 선택"
+    >
+
+      <div class="schedule-time">
+        ${escapeHTML(item.time)}
+      </div>
+
+      <h3 class="schedule-name">
+        ${escapeHTML(item.title)}
+      </h3>
+
+      <div class="schedule-place">
+        📍 ${escapeHTML(item.place)}
+      </div>
+
+      ${
+        item.note
+          ? `
+            <div class="schedule-note">
+              ${escapeHTML(item.note)}
+            </div>
+          `
+          : ""
+      }
+
+      <div class="schedule-actions">
+
+        <button
+          class="small-btn"
+          data-action="edit"
+          data-id="${escapeHTML(item.id)}"
+          type="button"
+        >
+          ✎ 수정
+        </button>
+
+        <button
+          class="small-btn delete"
+          data-action="delete"
+          data-id="${escapeHTML(item.id)}"
+          type="button"
+        >
+          × 삭제
+        </button>
+
+      </div>
+
+    </article>
+
+  `).join("");
+
+  updateSelectedUI();
+
+}
+
+
+/* =========================================
+   6. 선택 상태 업데이트
+========================================= */
+
+function updateSelectedUI() {
+
+  document.querySelectorAll(".schedule-card")
+    .forEach(card => {
+
+      card.classList.toggle(
+        "active",
+        card.dataset.id === selectedId
+      );
+
+    });
+
+  const all = sortedSchedules();
+
+  const index = all.findIndex(
+    item => item.id === selectedId
+  );
+
+  const item = currentSchedule();
+
+  if(!item) {
+
+    $("selectedTime").textContent = "-";
+
+    $("selectedTitle").textContent =
+      "일정을 선택해주세요.";
+
+    $("selectedPlace").textContent = "";
+
+  }else{
+
+    $("selectedTime").textContent =
+      `${item.date === DAY1 ? "11월 13일" : "11월 14일"} · ${item.time}`;
+
+    $("selectedTitle").textContent =
+      item.title;
+
+    $("selectedPlace").textContent =
+      "📍 " + item.place;
+
+  }
+
+  $("prevBtn").disabled =
+    index <= 0;
+
+  $("nextBtn").disabled =
+    index < 0 || index >= all.length - 1;
+
+}
+
+
+/* =========================================
+   7. 일정 선택
+========================================= */
+
+function selectSchedule(id, shouldScroll = true) {
+
+  const item = data.schedules.find(
+    x => x.id === id
+  );
+
+  if(!item) return;
+
+  const dayChanged =
+    activeDay !== item.date;
+
+  selectedId = id;
+
+  if(dayChanged) {
+
+    activeDay = item.date;
+
+    renderSchedules();
+
+  }else{
+
+    updateSelectedUI();
+
+  }
+
+  if(shouldScroll) {
+
+    scrollGuardUntil =
+      Date.now() + 1200;
+
+    requestAnimationFrame(() => {
+
+      const container = $("scheduleList");
+
+      const card = [...container.querySelectorAll(
+        ".schedule-card"
+      )].find(
+        el => el.dataset.id === id
+      );
+
+      if(!card) return;
+
+      const containerRect =
+        container.getBoundingClientRect();
+
+      const cardRect =
+        card.getBoundingClientRect();
+
+      const targetTop =
+        container.scrollTop +
+        cardRect.top -
+        containerRect.top -
+        15;
+
+      container.scrollTo({
+        top:targetTop,
+        behavior:"smooth"
+      });
+
+    });
+
+  }
+
+  renderMap();
+
+}
+
+
+/* =========================================
+   8. 다음 / 이전 버튼
+========================================= */
+
+function moveStep(direction) {
+
+  const all = sortedSchedules();
+
+  if(all.length === 0) return;
+
+  const currentIndex = all.findIndex(
+    item => item.id === selectedId
+  );
+
+  let nextIndex;
+
+  if(currentIndex < 0) {
+
+    nextIndex = 0;
+
+  }else{
+
+    nextIndex = currentIndex + direction;
+
+  }
+
+  if(
+    nextIndex < 0 ||
+    nextIndex >= all.length
+  ) {
+    return;
+  }
+
+  selectSchedule(
+    all[nextIndex].id,
+    true
+  );
+
+}
+
+
+$("prevBtn").addEventListener("click",() => {
+  moveStep(-1);
+});
+
+$("nextBtn").addEventListener("click",() => {
+  moveStep(1);
+});
+
+
+/* =========================================
+   9. 날짜 탭
+========================================= */
+
+document.querySelectorAll(".day-tab")
+  .forEach(button => {
+
+    button.addEventListener("click",() => {
+
+      const day = button.dataset.day;
+
+      const first = sortedSchedules().find(
+        item => item.date === day
+      );
+
+      if(first) {
+
+        selectSchedule(first.id,true);
+
+      }else{
+
+        activeDay = day;
+        selectedId = null;
+
+        renderSchedules();
+        renderMap();
+
+      }
+
+    });
+
+  });
+
+
+/* =========================================
+   10. 일정 카드 클릭
+========================================= */
+
+$("scheduleList").addEventListener("click",event => {
+
+  const actionButton =
+    event.target.closest("[data-action]");
+
+  if(actionButton) {
+
+    const id = actionButton.dataset.id;
+
+    if(actionButton.dataset.action === "edit") {
+      openScheduleDialog(id);
+    }
+
+    if(actionButton.dataset.action === "delete") {
+      deleteSchedule(id);
+    }
+
+    return;
+
+  }
+
+  const card = event.target.closest(
+    ".schedule-card"
+  );
+
+  if(card) {
+    selectSchedule(card.dataset.id,false);
+  }
+
+});
+
+
+$("scheduleList").addEventListener("keydown",event => {
+
+  if(
+    event.key !== "Enter" &&
+    event.key !== " "
+  ) {
+    return;
+  }
+
+  if(event.target.closest("button")) {
+    return;
+  }
+
+  const card = event.target.closest(
+    ".schedule-card"
+  );
+
+  if(card) {
+
+    event.preventDefault();
+
+    selectSchedule(card.dataset.id,false);
+
+  }
+
+});
+
+
+/* =========================================
+   11. 스크롤과 지도 연동
+========================================= */
+
+const scheduleContainer = $("scheduleList");
+
+scheduleContainer.addEventListener(
+  "wheel",
+  () => {
+    scrollGuardUntil = 0;
+  },
+  {passive:true}
+);
+
+scheduleContainer.addEventListener(
+  "touchstart",
+  () => {
+    scrollGuardUntil = 0;
+  },
+  {passive:true}
+);
+
+scheduleContainer.addEventListener("scroll",() => {
+
+  if(Date.now() < scrollGuardUntil) {
+    return;
+  }
+
+  if(scrollFrame !== null) {
+    cancelAnimationFrame(scrollFrame);
+  }
+
+  scrollFrame = requestAnimationFrame(() => {
+
+    scrollFrame = null;
+
+    if(Date.now() < scrollGuardUntil) {
+      return;
+    }
+
+    const container = $("scheduleList");
+
+    const cards = [
+      ...container.querySelectorAll(".schedule-card")
+    ];
+
+    if(cards.length === 0) return;
+
+    const containerTop =
+      container.getBoundingClientRect().top;
+
+    let closest = null;
+
+    let minDistance = Infinity;
+
+    cards.forEach(card => {
+
+      const distance = Math.abs(
+        card.getBoundingClientRect().top -
+        containerTop -
+        15
+      );
+
+      if(distance < minDistance) {
+
+        minDistance = distance;
+
+        closest = card;
+
+      }
+
+    });
+
+    if(
+      closest &&
+      closest.dataset.id !== selectedId
+    ) {
+
+      selectSchedule(
+        closest.dataset.id,
+        false
+      );
+
+    }
+
+  });
+
+});
+
+
+/* =========================================
+   12. 일정 추가 / 수정 모달
+========================================= */
+
+function openScheduleDialog(id = null) {
+
+  if(!requireLogin()) return;
+
+  editingId = id;
+
+  const item = id
+    ? data.schedules.find(x => x.id === id)
+    : null;
+
+  $("dialogTitle").textContent =
+    item ? "일정 수정 ✏️" : "일정 추가 🌰";
+
+  $("scheduleDate").value =
+    item ? item.date : activeDay;
+
+  $("scheduleTime").value =
+    item ? item.time : "";
+
+  $("schedulePlace").value =
+    item ? item.place : "";
+
+  $("scheduleTitle").value =
+    item ? item.title : "";
+
+  $("scheduleNote").value =
+    item ? item.note || "" : "";
+
+  $("scheduleDialog").showModal();
+
+}
+
+
+$("addScheduleBtn").addEventListener("click",() => {
+  openScheduleDialog();
+});
+
+
+$("cancelDialogBtn").addEventListener("click",() => {
+  $("scheduleDialog").close();
+});
+
+
+$("scheduleDialog").addEventListener("close",() => {
+  editingId = null;
+});
+
+
+/* =========================================
+   13. Firebase 데이터 변경 함수
+========================================= */
+
+async function mutateTrip(mutator) {
+
+  if(!requireLogin()) {
+    return false;
+  }
+
+  if(!db || !tripRef) {
+
+    toast("Firebase 연결을 확인해주세요.");
+
+    return false;
+
+  }
+
+  try {
+
+    await db.runTransaction(async transaction => {
+
+      const snapshot =
+        await transaction.get(tripRef);
+
+      const current =
+        snapshot.exists
+          ? snapshot.data().data
+          : createDefaultData();
+
+      const draft = normalizeData(
+        JSON.parse(JSON.stringify(current))
+      );
+
+      mutator(draft);
+
+      transaction.set(
+        tripRef,
+        {
+          data:draft,
+          updatedAt:
+            firebase.firestore.FieldValue.serverTimestamp(),
+          updatedBy:getUser().email || ""
+        },
+        {merge:true}
+      );
+
+    });
+
+    return true;
+
+  }catch(error) {
+
+    console.error(
+      "Firebase 저장 오류:",
+      error
+    );
+
+    toast(
+      "공동 저장에 실패했어요. Firebase 권한을 확인해주세요."
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================
+   14. 일정 저장
+========================================= */
+
+$("scheduleForm").addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    const date =
+      $("scheduleDate").value;
+
+    const time =
+      $("scheduleTime").value;
+
+    const place =
+      $("schedulePlace").value.trim();
+
+    const title =
+      $("scheduleTitle").value.trim();
+
+    const note =
+      $("scheduleNote").value.trim();
+
+    if(!time || !place || !title) {
+
+      toast("시간, 장소, 일정을 입력해주세요.");
+
+      return;
+
+    }
+
+    const item = {
+      id:editingId || uid(),
+      date,
+      time,
+      place,
+      title,
+      note
+    };
+
+    const saveButton = $("saveScheduleBtn");
+
+    saveButton.disabled = true;
+
+    try {
+
+      const success = await mutateTrip(draft => {
+
+        const index = draft.schedules.findIndex(
+          x => x.id === item.id
+        );
+
+        if(index >= 0) {
+
+          draft.schedules[index] = item;
+
+        }else{
+
+          draft.schedules.push(item);
+
+        }
+
+      });
+
+      if(!success) return;
+
+      selectedId = item.id;
+      activeDay = item.date;
+
+      $("scheduleDialog").close();
+
+      renderSchedules();
+
+      selectSchedule(item.id,true);
+
+      toast("일정을 저장했어요.");
+
+    }finally{
+
+      saveButton.disabled = false;
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   15. 일정 삭제
+========================================= */
+
+async function deleteSchedule(id) {
+
+  if(!requireLogin()) return;
+
+  if(!confirm("이 일정을 삭제할까요?")) {
+    return;
+  }
+
+  const success = await mutateTrip(draft => {
+
+    draft.schedules =
+      draft.schedules.filter(
+        item => item.id !== id
+      );
+
+  });
+
+  if(success) {
+    toast("일정을 삭제했어요.");
+  }
+
+}
+
+
+/* =========================================
+   16. 카카오맵 외부 열기
+========================================= */
+
+function openKakaoMap() {
+
+  const item = currentSchedule();
+
+  if(!item) {
+
+    toast("먼저 일정을 선택해주세요.");
+
+    return;
+
+  }
+
+  const query = item.place;
+
+  const url =
+    "https://map.kakao.com/?q=" +
+    encodeURIComponent(query);
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+$("openKakaoBtn").addEventListener(
+  "click",
+  openKakaoMap
+);
+
+
+/* =========================================
+   17. 카카오 지도 연결
+========================================= */
+
+function showMapFallback(message) {
+
+  $("mapFallback").hidden = false;
+
+  $("mapFallbackText").textContent =
+    message;
+
+}
+
+
+function loadKakaoMap() {
+
+  const key = String(data.mapKey || "").trim();
+
+  if(!key) {
+
+    showMapFallback(
+      "아래 지도 설정에서 카카오 JavaScript 키를 입력하면 일정별 위치가 표시돼요."
+    );
+
+    $("mapStatus").textContent =
+      "카카오맵 API 키가 필요해요.";
+
+    $("mapSettings").open = true;
+
+    return;
+
+  }
+
+  if(map && loadedMapKey === key) {
+
+    $("mapFallback").hidden = true;
+
+    renderMap();
+
+    return;
+
+  }
+
+  if(loadingMapKey === key) {
+    return;
+  }
+
+  if(loadedMapKey && loadedMapKey !== key) {
+
+    $("mapStatus").textContent =
+      "지도 키 변경 후 새로고침해주세요.";
+
+    return;
+
+  }
+
+  if(
+    window.kakao &&
+    window.kakao.maps &&
+    window.kakao.maps.Map
+  ) {
+
+    initializeMap(key);
+
+    return;
+
+  }
+
+  loadingMapKey = key;
+
+  $("mapStatus").textContent =
+    "카카오맵을 불러오는 중...";
+
+  const script = document.createElement("script");
+
+  script.src =
+    "https://dapi.kakao.com/v2/maps/sdk.js" +
+    "?appkey=" + encodeURIComponent(key) +
+    "&autoload=false" +
+    "&libraries=services";
+
+  script.onload = () => {
+
+    if(
+      !window.kakao ||
+      !window.kakao.maps
+    ) {
+
+      loadingMapKey = "";
+
+      showMapFallback(
+        "카카오맵 SDK를 불러오지 못했어요. JavaScript 키와 등록된 도메인을 확인해주세요."
+      );
+
+      $("mapStatus").textContent =
+        "지도 연결 실패";
+
+      return;
+
+    }
+
+    kakao.maps.load(() => {
+
+      loadingMapKey = "";
+
+      initializeMap(key);
+
+    });
+
+  };
+
+  script.onerror = () => {
+
+    loadingMapKey = "";
+
+    $("mapStatus").textContent =
+      "지도 연결 실패";
+
+    showMapFallback(
+      "카카오맵을 불러오지 못했어요. API 키, 도메인 등록, 인터넷 연결을 확인해주세요."
+    );
+
+  };
+
+  document.head.appendChild(script);
+
+}
+
+
+/* =========================================
+   18. 지도 생성
+========================================= */
+
+function initializeMap(key) {
+
+  try {
+
+    const center = new kakao.maps.LatLng(
+      36.455,
+      127.120
+    );
+
+    map = new kakao.maps.Map(
+      $("map"),
+      {
+        center,
+        level:6
+      }
+    );
+
+    placesService =
+      new kakao.maps.services.Places();
+
+    loadedMapKey = key;
+
+    $("mapFallback").hidden = true;
+
+    $("mapStatus").textContent =
+      "일정을 선택하면 지도가 이동해요.";
+
+    setTimeout(() => {
+
+      if(map) {
+        map.relayout();
+      }
+
+      renderMap();
+
+    },150);
+
+  }catch(error) {
+
+    console.error("지도 생성 오류:",error);
+
+    map = null;
+
+    $("mapStatus").textContent =
+      "지도 생성 실패";
+
+    showMapFallback(
+      "지도를 생성하지 못했어요. 카카오맵 설정을 확인해주세요."
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   19. 장소 좌표 검색
+========================================= */
+
+function searchKeyword(keyword) {
+
+  return new Promise(resolve => {
+
+    if(!placesService) {
+
+      resolve(null);
+
+      return;
+
+    }
+
+    placesService.keywordSearch(
+      keyword,
+      (results,status) => {
+
+        if(
+          status === kakao.maps.services.Status.OK &&
+          results.length > 0
+        ) {
+
+          resolve({
+            lat:Number(results[0].y),
+            lng:Number(results[0].x)
+          });
+
+        }else{
+
+          resolve(null);
+
+        }
+
+      }
+    );
+
+  });
+
+}
+
+
+async function resolvePlace(place) {
+
+  if(!place) return null;
+
+  if(!geoCache.has(place)) {
+
+    const promise = (async () => {
+
+      const query = /서울/.test(place)
+        ? place
+        : "공주 " + place;
+
+      let result = await searchKeyword(query);
+
+      if(!result && query !== place) {
+        result = await searchKeyword(place);
+      }
+
+      return result;
+
+    })();
+
+    geoCache.set(place,promise);
+
+  }
+
+  return geoCache.get(place);
+
+}
+
+
+/* =========================================
+   20. 지도 마커 업데이트
+========================================= */
+
+async function renderMap() {
+
+  if(!map || !placesService) {
+    return;
+  }
+
+  const sequence = ++mapRenderSequence;
+
+  const items = sortedSchedules().filter(
+    item => item.date === activeDay
+  );
+
+  const results = await Promise.all(
+    items.map(async item => ({
+      item,
+      point:await resolvePlace(item.place)
+    }))
+  );
+
+  if(sequence !== mapRenderSequence) {
+    return;
+  }
+
+  mapOverlays.forEach(overlay => {
+    overlay.setMap(null);
+  });
+
+  mapOverlays = [];
+
+  const groups = new Map();
+
+  results.forEach(result => {
+
+    if(!result.point) return;
+
+    const key = result.item.place;
+
+    if(!groups.has(key)) {
+
+      groups.set(key,{
+        point:result.point,
+        items:[]
+      });
+
+    }
+
+    groups.get(key).items.push(
+      result.item
+    );
+
+  });
+
+  for(const group of groups.values()) {
+
+    const selected = group.items.find(
+      item => item.id === selectedId
+    );
+
+    const representative =
+      selected || group.items[0];
+
+    const isActive = Boolean(selected);
+
+    const pin = document.createElement("button");
+
+    pin.type = "button";
+
+    pin.className =
+      "map-pin" + (isActive ? " active" : "");
+
+    pin.textContent =
+      "📍 " + representative.time;
+
+    pin.title = representative.place;
+
+    pin.addEventListener("click",() => {
+
+      selectSchedule(
+        representative.id,
+        true
+      );
+
+    });
+
+    const position = new kakao.maps.LatLng(
+      group.point.lat,
+      group.point.lng
+    );
+
+    const overlay = new kakao.maps.CustomOverlay({
+      map,
+      position,
+      content:pin,
+      yAnchor:1.25,
+      zIndex:isActive ? 10 : 2
+    });
+
+    mapOverlays.push(overlay);
+
+  }
+
+  const selectedResult = results.find(
+    result =>
+      result.item.id === selectedId &&
+      result.point
+  );
+
+  if(selectedResult) {
+
+    const position = new kakao.maps.LatLng(
+      selectedResult.point.lat,
+      selectedResult.point.lng
+    );
+
+    map.setLevel(5);
+
+    map.panTo(position);
+
+    $("mapStatus").textContent =
+      selectedResult.item.place;
+
+  }else if(items.length === 0) {
+
+    $("mapStatus").textContent =
+      "등록된 일정이 없어요.";
+
+  }else{
+
+    $("mapStatus").textContent =
+      "장소 검색 중이거나 위치를 찾지 못했어요.";
+
+  }
+
+}
+
+
+/* =========================================
+   21. 카카오 API 키 저장
+========================================= */
+
+$("saveMapKeyBtn").addEventListener(
+  "click",
+  async () => {
+
+    if(!requireLogin()) return;
+
+    const key =
+      $("mapKeyInput").value.trim();
+
+    if(!key) {
+
+      toast("카카오 JavaScript 키를 입력해주세요.");
+
+      return;
+
+    }
+
+    const button = $("saveMapKeyBtn");
+
+    button.disabled = true;
+
+    try {
+
+      const success = await mutateTrip(draft => {
+
+        draft.mapKey = key;
+
+      });
+
+      if(success) {
+
+        toast("지도 키를 저장했어요.");
+
+        if(
+          loadedMapKey &&
+          loadedMapKey !== key
+        ) {
+
+          toast(
+            "새 지도 키를 적용하려면 페이지를 새로고침해주세요."
+          );
+
+        }else{
+
+          data.mapKey = key;
+
+          loadKakaoMap();
+
+        }
+
+      }
+
+    }finally{
+
+      button.disabled = false;
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   22. 공동 메모장
+========================================= */
+
+$("memoInput").addEventListener("input",() => {
+
+  $("memoHint").textContent =
+    "수정한 내용이 있어요. 저장 버튼을 눌러주세요.";
+
+});
+
+
+$("saveMemoBtn").addEventListener(
+  "click",
+  async () => {
+
+    if(!requireLogin()) return;
+
+    const memo = $("memoInput").value;
+
+    const button = $("saveMemoBtn");
+
+    button.disabled = true;
+
+    try {
+
+      const success = await mutateTrip(draft => {
+
+        draft.memo = memo;
+
+      });
+
+      if(success) {
+
+        $("memoHint").textContent =
+          "메모가 저장되었어요.";
+
+        toast("메모를 저장했어요.");
+
+      }
+
+    }finally{
+
+      button.disabled = false;
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   23. Firebase 초기 데이터 생성
+========================================= */
+
+async function initializeTrip() {
+
+  if(initializingTrip || !tripRef) {
+    return;
+  }
+
+  initializingTrip = true;
+
+  try {
+
+    await db.runTransaction(async transaction => {
+
+      const snapshot =
+        await transaction.get(tripRef);
+
+      if(snapshot.exists) {
+        return;
+      }
+
+      transaction.set(tripRef,{
+        data:createDefaultData(),
+        createdAt:
+          firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    });
+
+  }catch(error) {
+
+    console.error(
+      "초기 데이터 생성 오류:",
+      error
+    );
+
+    toast(
+      "여행 데이터를 만들지 못했어요. Firestore 권한을 확인해주세요."
+    );
+
+  }finally{
+
+    initializingTrip = false;
+
+  }
+
+}
+
+
+/* =========================================
+   24. 실시간 데이터 반영
+========================================= */
+
+function applyRemoteData(incoming) {
+
+  const previousSchedules =
+    JSON.stringify(data.schedules);
+
+  const previousMapKey =
+    data.mapKey;
+
+  data = normalizeData(incoming);
+
+  const all = sortedSchedules();
+
+  const selectedExists = all.some(
+    item => item.id === selectedId
+  );
+
+  if(!selectedExists) {
+
+    const firstOfDay = all.find(
+      item => item.date === activeDay
+    );
+
+    const next =
+      firstOfDay || all[0] || null;
+
+    selectedId = next ? next.id : null;
+
+    if(next) {
+      activeDay = next.date;
+    }
+
+  }
+
+  const schedulesChanged =
+    previousSchedules !==
+    JSON.stringify(data.schedules);
+
+  if(schedulesChanged) {
+
+    renderSchedules();
+
+    renderMap();
+
+  }else{
+
+    updateSelectedUI();
+
+  }
+
+  if(document.activeElement !== $("memoInput")) {
+
+    $("memoInput").value =
+      data.memo;
+
+    $("memoHint").textContent =
+      "친구들과 공유되는 메모입니다.";
+
+  }
+
+  if(
+    document.activeElement !== $("mapKeyInput")
+  ) {
+
+    $("mapKeyInput").value =
+      data.mapKey;
+
+  }
+
+  if(previousMapKey !== data.mapKey) {
+
+    loadKakaoMap();
+
+  }
+
+}
+
+
+/* =========================================
+   25. Firebase 실시간 연결
+========================================= */
+
+function startRealtimeSync() {
+
+  if(!tripRef) return;
+
+  if(unsubscribeTrip) {
+
+    unsubscribeTrip();
+
+    unsubscribeTrip = null;
+
+  }
+
+  unsubscribeTrip = tripRef.onSnapshot(
+
+    snapshot => {
+
+      $("authStatus").textContent =
+        snapshot.metadata.fromCache
+          ? "서버 연결 확인 중..."
+          : "🟢 친구들과 공동편집 연결됨";
+
+      if(!snapshot.exists) {
+
+        initializeTrip();
+
+        return;
+
+      }
+
+      const remote = snapshot.data();
+
+      if(remote && remote.data) {
+
+        applyRemoteData(remote.data);
+
+      }
+
+    },
+
+    error => {
+
+      console.error(
+        "실시간 동기화 오류:",
+        error
+      );
+
+      $("authStatus").textContent =
+        "🔴 공동편집 연결 실패";
+
+      toast(
+        "Firebase 권한 또는 네트워크를 확인해주세요."
+      );
+
+    }
+
+  );
+
+}
+
+
+/* =========================================
+   26. Google 로그인
+========================================= */
+
+async function googleLogin() {
+
+  if(!auth) {
+
+    toast("Firebase를 불러오지 못했어요.");
+
+    return;
+
+  }
+
+  const provider =
+    new firebase.auth.GoogleAuthProvider();
+
+  try {
+
+    await auth.signInWithPopup(provider);
+
+  }catch(error) {
+
+    console.error("Google 로그인 오류:",error);
+
+    if(
+      error.code === "auth/popup-blocked" ||
+      error.code === "auth/operation-not-supported-in-this-environment"
+    ) {
+
+      try {
+
+        await auth.signInWithRedirect(provider);
+
+      }catch(redirectError) {
+
+        console.error(
+          "리디렉션 로그인 오류:",
+          redirectError
+        );
+
+        toast("로그인에 실패했어요.");
+
+      }
+
+      return;
+
+    }
+
+    if(error.code === "auth/popup-closed-by-user") {
+      return;
+    }
+
+    alert(
+      "Google 로그인에 실패했습니다.\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+async function googleLogout() {
+
+  if(!auth) return;
+
+  try {
+
+    await auth.signOut();
+
+  }catch(error) {
+
+    console.error("로그아웃 오류:",error);
+
+    toast("로그아웃에 실패했어요.");
+
+  }
+
+}
+
+
+$("loginBtn").addEventListener(
+  "click",
+  googleLogin
+);
+
+$("logoutBtn").addEventListener(
+  "click",
+  googleLogout
+);
+
+
+/* =========================================
+   27. 로그인 상태 변경
+========================================= */
+
+function handleAuthChange(user) {
+
+  if(unsubscribeTrip) {
+
+    unsubscribeTrip();
+
+    unsubscribeTrip = null;
+
+  }
+
+  if(user) {
+
+    $("authStatus").textContent =
+      "공동편집 연결 중...";
+
+    $("userName").textContent =
+      user.displayName ||
+      user.email ||
+      "";
+
+    $("loginBtn").hidden = true;
+
+    $("logoutBtn").hidden = false;
+
+    startRealtimeSync();
+
+  }else{
+
+    $("authStatus").textContent =
+      "구글 로그인 후 친구들과 공동편집할 수 있어요.";
+
+    $("userName").textContent = "";
+
+    $("loginBtn").hidden = false;
+
+    $("logoutBtn").hidden = true;
+
+    data = createDefaultData();
+
+    activeDay = DAY1;
+    selectedId = "initial-1";
+
+    $("memoInput").value = "";
+
+    $("memoHint").textContent =
+      "로그인하면 친구들과 메모를 공유할 수 있어요.";
+
+    renderSchedules();
+
+    renderMap();
+
+  }
+
+}
+
+
+/* =========================================
+   28. 초기 실행
+========================================= */
+
+function initializeApp() {
+
+  renderSchedules();
+
+  $("domainInfo").textContent =
+    "현재 사이트 주소: " +
+    (
+      location.origin === "null"
+        ? "로컬 파일 — 웹에 배포한 주소를 등록해주세요."
+        : location.origin
+    );
+
+  if(typeof firebase === "undefined") {
+
+    $("authStatus").textContent =
+      "Firebase 라이브러리 로드 실패";
+
+    toast(
+      "Firebase 연결 파일을 불러오지 못했어요."
+    );
+
+    return;
+
+  }
+
+  try {
+
+    if(!firebase.apps.length) {
+
+      firebase.initializeApp(
+        firebaseConfig
+      );
+
+    }
+
+    auth = firebase.auth();
+
+    db = firebase.firestore();
+
+    tripRef = db
+      .collection("trips")
+      .doc(TRIP_ID);
+
+    auth.getRedirectResult().catch(error => {
+
+      console.error(
+        "로그인 결과 확인 오류:",
+        error
+      );
+
+    });
+
+    auth.onAuthStateChanged(
+      handleAuthChange,
+      error => {
+
+        console.error(
+          "인증 상태 확인 오류:",
+          error
+        );
+
+        $("authStatus").textContent =
+          "Firebase 인증 연결 실패";
+
+      }
+    );
+
+  }catch(error) {
+
+    console.error(
+      "Firebase 초기화 오류:",
+      error
+    );
+
+    $("authStatus").textContent =
+      "Firebase 초기화 실패";
+
+    toast(
+      "Firebase 설정을 확인해주세요."
+    );
+
+  }
+
+}
+
+
+initializeApp();
+
+</script>
+
+</body>
+</html>
